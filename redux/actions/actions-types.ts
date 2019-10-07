@@ -3,7 +3,10 @@ import {RoundType} from "../../models/round.type";
 
 export enum ActionsEnum {
   START_GAME='START_GAME',
-  STORE_ROUND='STORE_ROUND'
+  STORE_ROUND='STORE_ROUND',
+  COUNT_WIN_USER_ONE='COUNT_WIN_USER_ONE',
+  COUNT_WIN_USER_TWO='COUNT_WIN_USER_TWO',
+  PLAY_AGAIN='PLAY_AGAIN'
 }
 
 interface StartGameAction {
@@ -16,4 +19,16 @@ interface StoreRoundAction {
   payload: RoundType;
 }
 
-export type GameActionTypes = StartGameAction | StoreRoundAction // add more with |
+interface CountWinUserOneAction {
+  type: typeof ActionsEnum.COUNT_WIN_USER_ONE
+}
+
+interface CountWinUserTwoAction {
+  type: typeof ActionsEnum.COUNT_WIN_USER_TWO
+}
+
+interface StartNewGameAction {
+  type: typeof ActionsEnum.PLAY_AGAIN
+}
+
+export type GameActionTypes = StartGameAction | StoreRoundAction | CountWinUserOneAction | CountWinUserTwoAction | StartNewGameAction

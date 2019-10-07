@@ -24,6 +24,26 @@ export const game: Reducer<GameType, GameActionTypes> = (state = gameIS, action:
         ...state,
         rounds
       }
+      case ActionsEnum.COUNT_WIN_USER_ONE:
+        let sumUOne = 1;
+        if(state.userOneCounter) {
+          sumUOne += state.userOneCounter;
+        }
+      return {
+        ...state,
+        userOneCounter: sumUOne
+      }
+      case ActionsEnum.COUNT_WIN_USER_TWO:
+        let sumUTwo = 1;
+        if(state.userTwoCounter) {
+          sumUTwo += state.userTwoCounter;
+        }
+        return {
+          ...state,
+          userTwoCounter: sumUTwo
+        }
+      case ActionsEnum.PLAY_AGAIN:
+        return {}
     default:
       return state;
   };

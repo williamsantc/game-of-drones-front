@@ -3,15 +3,20 @@ import LandingGame from "../components/landing-game";
 import {useSelector} from "react-redux";
 import {GameType} from "../models/game.type";
 import Playground from "../components/playground";
-import React from "react";
-
+import Winner from "../components/winner";
 
 const Home: React.FC = () => {
-  const gameId = useSelector<GameType, number | undefined>(state => state.gameId);
+  const game = useSelector<GameType, GameType>(state => state)
 
   return (
       <Layout>
-        {!gameId ? <LandingGame/> : <Playground/>}
+        {!game.gameId ?
+            <LandingGame/> : (game.userOneCounter && game.userOneCounter > 2) || (game.userTwoCounter && game.userTwoCounter > 2) ?
+                <Winner
+                    winnerName={game.userOneCounter && !game.userTwoCounter ||
+                    (game.userTwoCounter && game.userOneCounter && game.userOneCounter > game.userTwoCounter)
+                        ? game.userOne : game.userTwo}/>
+                : <Playground/>}
       </Layout>
   )
 };

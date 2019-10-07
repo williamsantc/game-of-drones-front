@@ -4,7 +4,7 @@ import {useCallback, useState} from "react";
 import axios from "axios";
 import {RoundRequestType} from "../models/request/round.request.type";
 import {WinnerRequestType} from "../models/request/winner.request.type";
-import {storeRound} from "../redux/actions/actions";
+import {countWinUserOne, countWinUserTwo, storeRound} from "../redux/actions/actions";
 import {RoundWinnerEnum} from "../models/round-winner.enum";
 import {GameType} from "../models/game.type";
 import {RoundType} from "../models/round.type";
@@ -25,8 +25,10 @@ const strRound = (request: RoundRequestType, game: GameType): [RequestType<Winne
       const roundDone: RoundType = {}
       if(resp.data.winner === RoundWinnerEnum.USER_ONE) {
         roundDone.winner = `${game.userOne} 🎉`;
+        dispatch(countWinUserOne())
       } else if(resp.data.winner === RoundWinnerEnum.USER_TWO) {
         roundDone.winner = `${game.userTwo} 🎉`;
+        dispatch(countWinUserTwo())
       } else {
         roundDone.winner = 'TIE 😵';
       }

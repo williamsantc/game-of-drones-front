@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import UserChoice from "./user-choice";
 import {MovementsType} from "../models/movements.type";
 import {useSelector} from "react-redux";
 import {GameType} from "../models/game.type";
 import {RoundRequestType} from "../models/request/round.request.type";
 import storeRound from "../hooks/store-round.hook";
-import {RoundType} from "../models/round.type";
-import {RoundWinnerEnum} from "../models/round-winner.enum";
 
 interface PlaygroundAttributes {
 
@@ -41,7 +39,7 @@ const Playground: React.FC = () => {
       <h1 className="round-title mb-1">Scoreboard</h1>
     </div>
     {game.rounds && game.rounds.length > 0 ? game.rounds.map((round, idx) => <div
-        className="row justify-content-center mt-1">
+        className="row justify-content-center mt-1" key={idx}>
       <div className="error-msg col">{idx + 1}</div><div className="error-msg col text-align-center">{round.winner}</div>
     </div>) : <p className="error-msg">Nothing to show yet, I'm waiting for u guys 🕓🕔</p>}
   </div>
