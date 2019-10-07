@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
+import {playAgain} from "../redux/actions/actions";
 
 interface WinnerAttributes {
   winnerName: string|undefined;
@@ -9,7 +10,7 @@ const Winner: React.FC<WinnerAttributes> = ({winnerName}) => {
 
   const dispatch = useDispatch();
 
-  const playAgain = () => {
+  const again = () => {
     dispatch(playAgain())
   }
   return <div>
@@ -20,7 +21,7 @@ const Winner: React.FC<WinnerAttributes> = ({winnerName}) => {
       <h1 className="game-title">😎 {winnerName} is the new EMPEROR! 😎</h1>
     </div>
     <div className="d-flex justify-content-center mt-3 mb-3">
-      <button className="btn" onClick={() => playAgain()}>Play Again</button>
+      <button className="btn" onClick={() => again()}>Play Again</button>
     </div>
   </div>
 }

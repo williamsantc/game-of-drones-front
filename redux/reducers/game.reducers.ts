@@ -43,7 +43,7 @@ export const game: Reducer<GameType, GameActionTypes> = (state = gameIS, action:
           userTwoCounter: sumUTwo
         }
       case ActionsEnum.PLAY_AGAIN:
-        return {}
+        return gameIS
     default:
       return state;
   };
