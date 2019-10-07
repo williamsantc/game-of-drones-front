@@ -4,31 +4,31 @@ import {MovementsType} from "../models/movements.type";
 import {useSelector} from "react-redux";
 import {GameType} from "../models/game.type";
 import {RoundRequestType} from "../models/request/round.request.type";
-import storeRound from "../hooks/store-round.hook";
+import storeRoundRequest from "../hooks/store-round.request.hook";
 
 interface PlaygroundAttributes {
 
 }
 
 const Playground: React.FC = () => {
-  const game = useSelector<GameType, GameType>(state => state)
+  const game = useSelector<GameType, GameType>(state => state);
   const [playerOneMovement, setPlayerOneMovement] = useState<MovementsType>();
   const [playerTwoMovement, setPlayerTwoMovement] = useState<MovementsType>();
 
   const roundRequest: RoundRequestType = {
     gameId: game.gameId,
     movementUserOne: playerOneMovement,
-    movementUserTwo: playerTwoMovement
-  }
+    movementUserTwo: playerTwoMovement,
+  };
 
-  const [response, sendRequest] = storeRound(roundRequest, game);
+  const [response, sendRequest] = storeRoundRequest(roundRequest, game);
 
   const match = () => {
     sendRequest().then(() => {
       setPlayerTwoMovement(undefined);
       setPlayerOneMovement(undefined);
     });
-  }
+  };
 
   return <div>
     <UserChoice saveMovement={!playerOneMovement ? setPlayerOneMovement : setPlayerTwoMovement}
@@ -42,6 +42,6 @@ const Playground: React.FC = () => {
         className="row justify-content-center mt-1" key={idx}>
       <div className="error-msg col">{idx + 1}</div><div className="error-msg col text-align-center">{round.winner}</div>
     </div>) : <p className="error-msg">Nothing to show yet, I'm waiting for u guys 🕓🕔</p>}
-  </div>
-}
+  </div>;
+};
 export default Playground;

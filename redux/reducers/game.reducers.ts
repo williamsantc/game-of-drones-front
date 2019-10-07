@@ -12,41 +12,28 @@ export const game: Reducer<GameType, GameActionTypes> = (state = gameIS, action:
       gameId: action.payload.gameId,
       userOne: action.payload.userOne,
       userTwo: action.payload.userTwo,
-      rounds: []
+      rounds: [],
     };
     case ActionsEnum.STORE_ROUND:
       let rounds: RoundType[] = [];
-      if(state.rounds) {
-        rounds = [...state.rounds, action.payload]
+      if (state.rounds) {
+        rounds = [...state.rounds, action.payload];
       }
 
       return {
         ...state,
-        rounds
-      }
-      case ActionsEnum.COUNT_WIN_USER_ONE:
-        let sumUOne = 1;
-        if(state.userOneCounter) {
-          sumUOne += state.userOneCounter;
-        }
-      return {
-        ...state,
-        userOneCounter: sumUOne
-      }
-      case ActionsEnum.COUNT_WIN_USER_TWO:
-        let sumUTwo = 1;
-        if(state.userTwoCounter) {
-          sumUTwo += state.userTwoCounter;
-        }
+        rounds,
+      };
+      case ActionsEnum.STORE_WINNER:
         return {
           ...state,
-          userTwoCounter: sumUTwo
-        }
+          winner: action.payload,
+        };
       case ActionsEnum.PLAY_AGAIN:
-        return gameIS
+        return gameIS;
     default:
       return state;
-  };
+  }
 };
 
 const store = createStore(game);

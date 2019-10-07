@@ -7,7 +7,7 @@ import axios from "axios";
 import {InitGameType} from "../models/init-game.type";
 import {startGame} from "../redux/actions/actions";
 
-const initGame = (request: InitGameRequestType): [RequestType<GameStartedType>, () => Promise<void>] => {
+const initGameRequest = (request: InitGameRequestType): [RequestType<GameStartedType>, () => Promise<void>] => {
   const dispatch = useDispatch();
   const [response, setResponse] = useState<RequestType<GameStartedType>>({
     data: null,
@@ -33,4 +33,4 @@ const initGame = (request: InitGameRequestType): [RequestType<GameStartedType>, 
   return [response, call];
 };
 
-export default initGame;
+export default initGameRequest;

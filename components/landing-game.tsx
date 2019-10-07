@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {InitGameRequestType} from "../models/request/init-game.request.type";
-import initGame from "../hooks/init-game.hook";
+import initGameRequest from "../hooks/init-game-request.hook";
 
 const LandingGame: React.FC = () => {
   const [userOneNickname, setUserOneNickname] = useState('');
@@ -8,10 +8,10 @@ const LandingGame: React.FC = () => {
 
   const request: InitGameRequestType = {
     userOne: {userNickname: userOneNickname},
-    userTwo: {userNickname: userTwoNickname}
-  }
+    userTwo: {userNickname: userTwoNickname},
+  };
 
-  const [response, sendRequest] = initGame(request);
+  const [response, sendRequest] = initGameRequest(request);
 
   return (<div>
     <div className="d-flex justify-content-center">
@@ -27,7 +27,7 @@ const LandingGame: React.FC = () => {
       <button className="btn" onClick={() => sendRequest()}>Start Game</button>
     </div>
     {response.error ? <p className="error-msg">⚠️An error occurred: {response.error} 😔</p> : ''}
-  </div>)
-}
+  </div>);
+};
 
 export default LandingGame;

@@ -27,6 +27,6 @@ const UserChoice: React.FC<UserChoiceAttributes> = ({saveMovement, nickname, rou
       </button>
     </div>
   </div>);
-}
+};
 
 export default UserChoice;

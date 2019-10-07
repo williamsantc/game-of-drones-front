@@ -4,12 +4,12 @@ import {useCallback, useState} from "react";
 import axios from "axios";
 import {RoundRequestType} from "../models/request/round.request.type";
 import {WinnerRequestType} from "../models/request/winner.request.type";
-import {countWinUserOne, countWinUserTwo, storeRound} from "../redux/actions/actions";
+import {storeRound, storeWinner} from "../redux/actions/actions";
 import {RoundWinnerEnum} from "../models/round-winner.enum";
 import {GameType} from "../models/game.type";
 import {RoundType} from "../models/round.type";
 
-const strRound = (request: RoundRequestType, game: GameType): [RequestType<WinnerRequestType>, () => Promise<void>] => {
+const storeRoundRequest = (request: RoundRequestType, game: GameType): [RequestType<WinnerRequestType>, () => Promise<void>] => {
   const dispatch = useDispatch();
   const [response, setResponse] = useState<RequestType<WinnerRequestType>>({
     data: null,
@@ -22,17 +22,22 @@ const strRound = (request: RoundRequestType, game: GameType): [RequestType<Winne
     try {
       const resp = await axios.post<WinnerRequestType>('http://localhost:3000/play-round', request);
       setResponse({data: resp.data, isLoading: false, error: null});
-      const roundDone: RoundType = {}
-      if(resp.data.winner === RoundWinnerEnum.USER_ONE) {
+      const roundDone: RoundType = {};
+      let possibleEmperor: string | undefined = '';
+      if (resp.data.winner === RoundWinnerEnum.USER_ONE) {
         roundDone.winner = `${game.userOne} 🎉`;
-        dispatch(countWinUserOne())
-      } else if(resp.data.winner === RoundWinnerEnum.USER_TWO) {
+        possibleEmperor = game.userOne;
+      } else if (resp.data.winner === RoundWinnerEnum.USER_TWO) {
         roundDone.winner = `${game.userTwo} 🎉`;
-        dispatch(countWinUserTwo())
+        possibleEmperor = game.userTwo;
       } else {
         roundDone.winner = 'TIE 😵';
       }
-      dispatch(storeRound(roundDone))
+      dispatch(storeRound(roundDone));
+
+      if (resp.data.winner !== RoundWinnerEnum.TIE && !resp.data.continuePlaying && possibleEmperor) {
+        dispatch(storeWinner(possibleEmperor));
+      }
     } catch (error) {
       setResponse(prev => ({...prev, isLoading: false, error: error.response.data.error.message}));
     }
@@ -40,4 +45,4 @@ const strRound = (request: RoundRequestType, game: GameType): [RequestType<Winne
   return [response, call];
 };
 
-export default strRound;
+export default storeRoundRequest;

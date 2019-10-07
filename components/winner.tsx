@@ -11,8 +11,8 @@ const Winner: React.FC<WinnerAttributes> = ({winnerName}) => {
   const dispatch = useDispatch();
 
   const again = () => {
-    dispatch(playAgain())
-  }
+    dispatch(playAgain());
+  };
   return <div>
     <div className="d-flex justify-content-center">
       <h1 className="game-title">We have a WINNER!</h1>
@@ -23,7 +23,7 @@ const Winner: React.FC<WinnerAttributes> = ({winnerName}) => {
     <div className="d-flex justify-content-center mt-3 mb-3">
       <button className="btn" onClick={() => again()}>Play Again</button>
     </div>
-  </div>
-}
+  </div>;
+};
 
-export default Winner
+export default Winner;

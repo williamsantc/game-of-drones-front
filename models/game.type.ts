@@ -5,6 +5,5 @@ export interface GameType {
   userOne?: string;
   userTwo?: string;
   rounds?: RoundType[];
-  userOneCounter?: number;
-  userTwoCounter?: number;
+  winner?: string;
 }
