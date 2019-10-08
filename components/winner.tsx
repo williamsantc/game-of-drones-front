@@ -1,7 +1,8 @@
-import React, {Dispatch} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {playAgain} from "../redux/actions/actions";
 import {GameActionTypes} from "../redux/actions/actions-types";
+import {Dispatch} from "redux";
 
 interface WinnerAttributes {
   winnerName: string|undefined;

@@ -1,6 +1,6 @@
 import {ResponseType} from "../models/http/response.type";
 import {useDispatch} from "react-redux";
-import {Dispatch, useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {RoundRequestType} from "../models/http/round.request.type";
 import {WinnerResponseType} from "../models/http/winner.response.type";
@@ -9,6 +9,8 @@ import {RoundWinnerEnum} from "../models/round-winner.enum";
 import {GameType} from "../models/game.type";
 import {RoundType} from "../models/round.type";
 import {GameActionTypes} from "../redux/actions/actions-types";
+import {Dispatch} from "redux";
+import enviroment from "../utils/enviroment";
 
 const storeRoundRequest = (request: RoundRequestType, game: GameType): [ResponseType<WinnerResponseType>, () => Promise<void>] => {
   let dispatch: Dispatch<GameActionTypes> = useDispatch();
@@ -21,7 +23,8 @@ const storeRoundRequest = (request: RoundRequestType, game: GameType): [Response
   const call = useCallback(async () => {
     setResponse(prev => ({...prev, isLoading: true}));
     try {
-      const resp = await axios.post<WinnerResponseType>('http://localhost:3000/play-round', request);
+      const { API_URL } = enviroment
+      const resp = await axios.post<WinnerResponseType>(`${API_URL}/play-round`, request);
       setResponse({data: resp.data, isLoading: false, error: null});
 
       const computedRound = computeRound(resp.data, game.userOne, game.userTwo);

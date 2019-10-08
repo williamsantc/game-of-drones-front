@@ -24,7 +24,7 @@ const Playground: React.FC = () => {
   const [response, sendRequest] = storeRoundRequest(roundRequest, game);
 
   const match = () => {
-    sendRequest().then(() => {
+    sendRequest().finally(() => {
       setPlayerTwoMovement(undefined);
       setPlayerOneMovement(undefined);
     });

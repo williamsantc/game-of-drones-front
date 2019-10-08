@@ -28,6 +28,7 @@
     "@types/react": "^16.8.24",
     "@types/react-dom": "16.8.5",
     "@types/react-redux": "^7.1.1",
+    "@types/sinon": "^7.5.0",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "babel-core": "^6.26.3",
