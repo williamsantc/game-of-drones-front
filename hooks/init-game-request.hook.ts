@@ -1,5 +1,5 @@
-import {InitGameRequestType} from "../models/request/init-game.request.type";
-import {RequestType} from "../models/request/request.type";
+import {InitGameRequestType} from "../models/http/init-game.request.type";
+import {ResponseType} from "../models/http/response.type";
 import {GameStartedType} from "../models/game-started.type";
 import {useDispatch} from "react-redux";
 import {useCallback, useState} from "react";
@@ -7,9 +7,9 @@ import axios from "axios";
 import {InitGameType} from "../models/init-game.type";
 import {startGame} from "../redux/actions/actions";
 
-const initGameRequest = (request: InitGameRequestType): [RequestType<GameStartedType>, () => Promise<void>] => {
+const initGameRequest = (request: InitGameRequestType): [ResponseType<GameStartedType>, () => Promise<void>] => {
   const dispatch = useDispatch();
-  const [response, setResponse] = useState<RequestType<GameStartedType>>({
+  const [response, setResponse] = useState<ResponseType<GameStartedType>>({
     data: null,
     error: null,
     isLoading: false,

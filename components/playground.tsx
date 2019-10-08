@@ -3,7 +3,7 @@ import UserChoice from "./user-choice";
 import {MovementsType} from "../models/movements.type";
 import {useSelector} from "react-redux";
 import {GameType} from "../models/game.type";
-import {RoundRequestType} from "../models/request/round.request.type";
+import {RoundRequestType} from "../models/http/round.request.type";
 import storeRoundRequest from "../hooks/store-round.request.hook";
 
 interface PlaygroundAttributes {

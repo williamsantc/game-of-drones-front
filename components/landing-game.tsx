@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {InitGameRequestType} from "../models/request/init-game.request.type";
+import {InitGameRequestType} from "../models/http/init-game.request.type";
 import initGameRequest from "../hooks/init-game-request.hook";
 
 const LandingGame: React.FC = () => {
@@ -7,8 +7,8 @@ const LandingGame: React.FC = () => {
   const [userTwoNickname, setUserTwoNickname] = useState('');
 
   const request: InitGameRequestType = {
-    userOne: {userNickname: userOneNickname},
-    userTwo: {userNickname: userTwoNickname},
+    userOne: {userNickname: userOneNickname.trim()},
+    userTwo: {userNickname: userTwoNickname.trim()},
   };
 
   const [response, sendRequest] = initGameRequest(request);

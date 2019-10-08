@@ -1,4 +1,4 @@
-export interface WinnerRequestType {
+export interface WinnerResponseType {
   winner: number;
   continuePlaying: boolean;
 }
