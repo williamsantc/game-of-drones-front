@@ -1,6 +1,6 @@
 import {ResponseType} from "../models/http/response.type";
 import {useDispatch} from "react-redux";
-import {useCallback, useEffect, useState} from "react";
+import {Dispatch, useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import {RoundRequestType} from "../models/http/round.request.type";
 import {WinnerResponseType} from "../models/http/winner.response.type";
@@ -8,9 +8,10 @@ import {storeRound, storeWinner} from "../redux/actions/actions";
 import {RoundWinnerEnum} from "../models/round-winner.enum";
 import {GameType} from "../models/game.type";
 import {RoundType} from "../models/round.type";
+import {GameActionTypes} from "../redux/actions/actions-types";
 
 const storeRoundRequest = (request: RoundRequestType, game: GameType): [ResponseType<WinnerResponseType>, () => Promise<void>] => {
-  const dispatch = useDispatch();
+  let dispatch: Dispatch<GameActionTypes> = useDispatch();
   const [response, setResponse] = useState<ResponseType<WinnerResponseType>>({
     data: null,
     error: null,

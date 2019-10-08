@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import {useDispatch} from "react-redux";
 import {playAgain} from "../redux/actions/actions";
+import {GameActionTypes} from "../redux/actions/actions-types";
 
 interface WinnerAttributes {
   winnerName: string|undefined;
@@ -8,7 +9,7 @@ interface WinnerAttributes {
 
 const Winner: React.FC<WinnerAttributes> = ({winnerName}) => {
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<GameActionTypes> = useDispatch();
 
   const again = () => {
     dispatch(playAgain());
