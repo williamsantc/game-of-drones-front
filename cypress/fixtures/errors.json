@@ -1,0 +1,4 @@
+{
+  "nickname.required": "An error occurred: The nickname of the user is required",
+  "nickname.equals": "The nicknames provided are equals"
+}

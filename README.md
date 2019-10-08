@@ -11,8 +11,11 @@
 # install dependencies
 $ npm install
 
-# run test
+# run unit test
 $ npm run test
+
+# run e2e test
+$ npm run test:e2e
 
 # start development mode localhost:8090
 $ npm run dev
