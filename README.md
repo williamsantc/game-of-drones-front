@@ -11,6 +11,8 @@
 # install dependencies
 $ npm install
 
+# run test
+$ npm run test
 
 # start development mode localhost:8090
 $ npm run dev
