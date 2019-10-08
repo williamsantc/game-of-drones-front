@@ -22,7 +22,7 @@ const initGameRequest = (request: InitGameRequestType): [ResponseType<GameStarte
   const call = useCallback(async () => {
     setResponse(prev => ({...prev, isLoading: true}));
     try {
-      const { API_URL } = enviroment
+      const { API_URL } = enviroment;
       const resp = await axios.post<GameStartedType>(`${API_URL}/save-players`, request);
       setResponse({data: resp.data, isLoading: false, error: null});
       const gamePros: InitGameType = {

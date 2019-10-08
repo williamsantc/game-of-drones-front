@@ -10,10 +10,11 @@ import {GameType} from "../models/game.type";
 import {RoundType} from "../models/round.type";
 import {GameActionTypes} from "../redux/actions/actions-types";
 import {Dispatch} from "redux";
-import enviroment from "../utils/enviroment";
+import environment from "../utils/enviroment";
+import {computeRoundService} from "../services/compute-round.service";
 
 const storeRoundRequest = (request: RoundRequestType, game: GameType): [ResponseType<WinnerResponseType>, () => Promise<void>] => {
-  let dispatch: Dispatch<GameActionTypes> = useDispatch();
+  const dispatch: Dispatch<GameActionTypes> = useDispatch();
   const [response, setResponse] = useState<ResponseType<WinnerResponseType>>({
     data: null,
     error: null,
@@ -23,13 +24,13 @@ const storeRoundRequest = (request: RoundRequestType, game: GameType): [Response
   const call = useCallback(async () => {
     setResponse(prev => ({...prev, isLoading: true}));
     try {
-      const { API_URL } = enviroment
+      const { API_URL } = environment;
       const resp = await axios.post<WinnerResponseType>(`${API_URL}/play-round`, request);
       setResponse({data: resp.data, isLoading: false, error: null});
 
-      const computedRound = computeRound(resp.data, game.userOne, game.userTwo);
+      const computedRound = computeRoundService(resp.data, game.userOne, game.userTwo);
       dispatch(storeRound(computedRound.roundDone));
-      if(computedRound.possibleEmperor) {
+      if (computedRound.possibleEmperor) {
         dispatch(storeWinner(computedRound.possibleEmperor));
       }
 
@@ -39,30 +40,5 @@ const storeRoundRequest = (request: RoundRequestType, game: GameType): [Response
   }, [request]);
   return [response, call];
 };
-
-export const computeRound = (winnerResponse: WinnerResponseType, userOne: string|undefined, userTwo: string|undefined)
-    : { roundDone: RoundType, possibleEmperor?: string } => {
-  const roundDone: RoundType = {};
-  let possibleEmperor: string | undefined = '';
-  if (winnerResponse.winner === RoundWinnerEnum.USER_ONE) {
-    roundDone.winner = `${userOne} 🎉`;
-    possibleEmperor = userOne;
-  } else if (winnerResponse.winner === RoundWinnerEnum.USER_TWO) {
-    roundDone.winner = `${userTwo} 🎉`;
-    possibleEmperor = userTwo;
-  } else {
-    roundDone.winner = 'TIE 😵';
-  }
-
-  const computed: ReturnType<typeof computeRound> = {
-    roundDone
-  }
-
-  if (winnerResponse.winner !== RoundWinnerEnum.TIE && !winnerResponse.continuePlaying && possibleEmperor) {
-    computed.possibleEmperor = possibleEmperor;
-  }
-
-  return computed;
-}
 
 export default storeRoundRequest;

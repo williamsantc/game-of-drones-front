@@ -16,13 +16,13 @@ const UserChoice: React.FC<UserChoiceAttributes> = ({saveMovement, nickname, rou
       <h1 className="round-title mt-1">Player: {nickname}</h1>
     </div>
     <div className="d-flex justify-content-center">
-      <button className="btn-movement"
+      <button id={MovementsType.ROCK} className="btn-movement"
               onClick={() => saveMovement(MovementsType.ROCK)}>{MovementsType.ROCK}!
       </button>
-      <button className="btn-movement ml-3"
+      <button id={MovementsType.SCISSORS} className="btn-movement ml-3"
               onClick={() => saveMovement(MovementsType.SCISSORS)}>{MovementsType.SCISSORS}!
       </button>
-      <button className="btn-movement ml-3"
+      <button id={MovementsType.PAPER} className="btn-movement ml-3"
               onClick={() => saveMovement(MovementsType.PAPER)}>{MovementsType.PAPER}!
       </button>
     </div>

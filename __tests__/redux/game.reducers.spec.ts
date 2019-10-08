@@ -11,7 +11,7 @@ describe('GameReducer', () => {
     const initGame: InitGameType = {
       userOne: 'test',
       userTwo: 'other',
-      gameId: 1
+      gameId: 1,
     };
 
     const expectedState = {
@@ -31,10 +31,10 @@ describe('GameReducer', () => {
   it('should return state with new round on action STORE_ROUND', () => {
     // Arrange
     const round: RoundType = {
-      winner: 'test'
+      winner: 'test',
     };
 
-    const initialState:GameType = {
+    const initialState: GameType = {
       gameId: 1,
       userOne: 'test',
       userTwo: 'other',
@@ -59,13 +59,13 @@ describe('GameReducer', () => {
     // Arrange
     const winner = 'test';
 
-    const initialState:GameType = {
-      gameId: 1
+    const initialState: GameType = {
+      gameId: 1,
     };
 
     const expectedState: GameType = {
       gameId: 1,
-      winner
+      winner,
     };
 
     // Act
@@ -77,8 +77,8 @@ describe('GameReducer', () => {
 
   it('should return empty state on action PLAY_AGAIN', () => {
     // Arrange
-    const initialState:GameType = {
-      gameId: 1
+    const initialState: GameType = {
+      gameId: 1,
     };
 
     const expectedState: GameType = {};
@@ -94,4 +94,4 @@ describe('GameReducer', () => {
 export {
   // Use an empty export to please Babel's single file emit.
   // https://github.com/Microsoft/TypeScript/issues/15230
-}
+};
