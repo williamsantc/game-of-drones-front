@@ -7,6 +7,9 @@ describe('UserChoice', () => {
   const ROUND = 1;
   const NICKNAME = 'TEST';
   const EVENT_CLICK = 'click';
+  const SAVE_MOVEMENT = {
+    saveMovement: (movement: MovementsType) => {},
+  };
 
   it('component renders', () => {
     // Arrange - Act - Assert
@@ -31,44 +34,35 @@ describe('UserChoice', () => {
 
   it('should call saveMovement method with value ROCK on ROCK button', () => {
     // Arrange
-    const test = {
-      saveMovement: (movement: MovementsType) => {},
-    };
-    spyOn(test, "saveMovement");
+    spyOn(SAVE_MOVEMENT, "saveMovement");
     // Act
-    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={test.saveMovement} />);
+    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={SAVE_MOVEMENT.saveMovement} />);
     wrapper.find(`#${MovementsType.ROCK}`).first().simulate(EVENT_CLICK);
 
     // Assert
-    expect(test.saveMovement).toHaveBeenCalledWith(MovementsType.ROCK);
+    expect(SAVE_MOVEMENT.saveMovement).toHaveBeenCalledWith(MovementsType.ROCK);
   });
 
   it('should call saveMovement method with value PAPER on PAPER button', () => {
     // Arrange
-    const test = {
-      saveMovement: (movement: MovementsType) => {},
-    };
-    spyOn(test, "saveMovement");
+    spyOn(SAVE_MOVEMENT, "saveMovement");
     // Act
-    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={test.saveMovement} />);
+    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={SAVE_MOVEMENT.saveMovement} />);
     wrapper.find(`#${MovementsType.PAPER}`).first().simulate(EVENT_CLICK);
 
     // Assert
-    expect(test.saveMovement).toHaveBeenCalledWith(MovementsType.PAPER);
+    expect(SAVE_MOVEMENT.saveMovement).toHaveBeenCalledWith(MovementsType.PAPER);
   });
 
   it('should call saveMovement method with value SCISSORS on SCISSORS button', () => {
     // Arrange
-    const test = {
-      saveMovement: (movement: MovementsType) => {},
-    };
-    spyOn(test, "saveMovement");
+    spyOn(SAVE_MOVEMENT, "saveMovement");
     // Act
-    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={test.saveMovement} />);
+    const wrapper = mount(<UserChoice round={ROUND}  nickname={NICKNAME} saveMovement={SAVE_MOVEMENT.saveMovement} />);
     wrapper.find(`#${MovementsType.SCISSORS}`).first().simulate(EVENT_CLICK);
 
     // Assert
-    expect(test.saveMovement).toHaveBeenCalledWith(MovementsType.SCISSORS);
+    expect(SAVE_MOVEMENT.saveMovement).toHaveBeenCalledWith(MovementsType.SCISSORS);
   });
 
 });
